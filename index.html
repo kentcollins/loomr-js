@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>
+  </head>
+  <body>
+    <button id="loadButton" type="button" class="btn btn-success"
+        onclick="showTheFile()">Load</button>
+    <button onclick="socket.emit('loom command', 'OPEN')">Open</button>
+    <button onclick="socket.emit('loom command', 'CLOSE')">Close</button>
+    <button onclick="socket.emit('loom command', 'PICK')">Pick</button>
+    <button onclick="socket.emit('loom command', 'AUTO')">AutoAdvance</button>
+    <button onclick="socket.emit('loom command', 'LOOP')">Loop</button>
+    <button onclick="socket.emit('loom command', 'EXIT')">Shutdown Loom</button><br><br><hr>
+    <input id="fileInput" type="file">Select a WIF file</input>
+    <button id="loadFile" onclick="socket.emit('loom command', 'Resource request: '+fileInput.value)">Load Selected File</button>    
+<ul id="messages"></ul>
+    <form action="">
+    </form>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+     var loomPickerKey = "AIzaSyDgsbcnY8NsVbPYZy9-E77A1xM4g9O3KZ0";
+      var socket = io();
+      $('form').submit(function(){
+        socket.emit('loom command', 'LOAD '+$('#m').val());
+        $('#m').val('');
+        return false;
+      });
+      socket.on('loom command', function(msg){
+        $('#messages').append($('<li>').text(msg));
+      });
+      $('fileLoad').click(function() {
+        socket.emit('loom command', 'File resource: '+fileInput.val());});
+    </script>
+  </body>
+</html>
