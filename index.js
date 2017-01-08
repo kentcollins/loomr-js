@@ -13,6 +13,12 @@ io.on('connection', function(socket){
   });
 });
 
+// for cloud 9, use this process port
+// http.listen(process.env.PORT, function(){
+//   console.log('listening on '+process.env.PORT);
+// });
+
+// for Raspberry Pi services, use port 3000
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
