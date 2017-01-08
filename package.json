@@ -1,9 +1,13 @@
 {
-  "name": "chat-socket",
+  "name": "loomr",
   "version": "0.0.1",
   "description": "test socket.io app",
   "dependencies": {
     "express": "^4.10.2",
     "socket.io": "^1.7.2"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/kentcollins/loomr-js"
   }
 }
